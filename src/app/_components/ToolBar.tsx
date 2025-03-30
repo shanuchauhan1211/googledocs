@@ -3,24 +3,86 @@
 import { cn } from "@/lib/utils";
 import {type ColorResult , SketchPicker} from 'react-color'
 import {type Level} from '@tiptap/extension-heading'
-import { AlignCenter, AlignCenterIcon, AlignJustifyIcon, AlignLeftIcon, AlignRightIcon, BoldIcon, ChevronDownIcon, HighlighterIcon, ImageIcon, ItalicIcon, Link2Icon, ListIcon, ListOrderedIcon, ListTodoIcon, LucideIcon, MessageSquarePlusIcon, PrinterIcon, Redo2Icon, RemoveFormattingIcon, SearchCheckIcon, SearchIcon, SpellCheck2Icon, UnderlineIcon, Undo2Icon, UploadIcon } from "lucide-react";
+import {  AlignCenterIcon, AlignJustifyIcon, AlignLeftIcon, AlignRightIcon, BoldIcon, ChevronDownIcon, HighlighterIcon, ImageIcon, ItalicIcon, Link2Icon, ListCollapseIcon, ListIcon, ListOrderedIcon, ListTodoIcon, LucideIcon, MessageSquarePlusIcon, MinusIcon, PlusIcon, PrinterIcon, Redo2Icon, RemoveFormattingIcon, SearchCheckIcon, SearchIcon, SpellCheck2Icon, UnderlineIcon, Undo2Icon, UploadIcon } from "lucide-react";
 import { useEditorStore } from "@/store/editorStore";
 import { Separator } from "@/components/ui/separator";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { DropdownMenu,DropdownMenuContent,DropdownMenuItem,DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { DialogHeader,Dialog,DialogContent, DialogFooter,DialogTitle } from "@/components/ui/dialog";
-import Color from "@tiptap/extension-color";
+// import Color from "@tiptap/extension-color";
 import { useDisplayToolTipStore } from "@/store/editorStore";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-// import { Button } from "@/components/ui/button";
+
+
 interface ToolBarProps{
     onClick?:() => void;
     isActive?:boolean;
     icon:LucideIcon;
     label:string;
 }
+
+
+
+
+const LineHeightButton = ()=>{
+
+    const {editor} = useEditorStore();
+
+   const lineHeights = [
+    {
+        label:"Default",
+        value:"normal"
+    },
+    {
+        label:"Single",
+        value:"1"
+    },
+    {
+        label:"1.15",
+        value:"1.15"
+    },
+    {
+        label:"1.5",
+        value:"1.5"
+    },  {
+        label:"Double",
+        value:"2"
+    },
+    
+   ]
+
+return(
+
+<DropdownMenu>
+            <DropdownMenuTrigger asChild>
+<button className="h-7 min-w-8 shrink-0   flex flex-col text-center  items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1  overflow-hidden text-sm ">
+< ListCollapseIcon  className="size-4"/>
+    </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="p-1 z-10 text-sm border border-[#C7C7C7] flex flex-col  gap-y-1 bg-white ">
+{
+    lineHeights.map(({label,value})=>(
+        <button key={value} onClick={()=>{editor?.chain().focus().setLineHeight(value).run()}} className={cn(
+            "flex gap-x-2 px-2 py-1 items-center hover:bg-neutral-200/80 rounded-md",
+             editor?.getAttributes("paragraph").lineHeight === value && "bg-neutral-200/80"
+        )}>
+            <span>{label}</span>
+        </button>
+    ))
+}
+            </DropdownMenuContent>
+        </DropdownMenu>
+
+
+)
+
+
+}
+
+
+
 
 
 
@@ -125,15 +187,18 @@ const UpdateFontSize = (newSize:string)=>{
 }
 
 return(
-<div>
-    FontSize
+<div className="flex items-center gap-x-1">
+ <button  onClick={decrement}  className="h-7 flex items-center w-7 justify-center shrink-0 rounded-sm hover:bg-neutral-200/80 " >   <MinusIcon className="size-4"/>       </button>
+ {
+    isEditing?(<input value={inputValue} onChange={(e)=>{setInputValue(e.target.value)}} onBlur={handleInputBlur} onKeyDown={handleKeyDown} className="h-7 text-sm border text-center border-neutral-400 w-10  rounded-sm hover:bg-neutral-200/80" />):(<button onClick={()=>{setIsEditing(true); setFontSize(currentFontSize)}} className="h-7 text-sm border border-neutral-400 w-10  rounded-sm hover:bg-neutral-200/80 " >  {currentFontSize}</button>)
+ }
+        <button  onClick={increment}  className="h-7 flex items-center w-7 justify-center shrink-0 rounded-sm hover:bg-neutral-200/80 " >   <PlusIcon className="size-4"/>       </button>
 </div>
 
 )
 
 
 }
-
 
 
 
@@ -631,7 +696,7 @@ const sections:{
 ];
 
   return (
-    <div className="bg-[#fffefe] flex items-center min-h-[50px] px-2 py-1 rounded-b-2xl gap-1">
+    <div className="duration-300 bg-[#e7e7e7] mt-1 hover:bg-[#c7c7c7] print:hidden flex items-center min-h-[50px] px-2 py-1 rounded-3xl gap-1">
 
 {
     sections[0]?.map((item)=>{
@@ -675,6 +740,7 @@ const sections:{
 <AlignButton/>
 <ListButton/>
 <FontSizeButton/>
+<LineHeightButton/>
     </div>
   )
 }

@@ -3,6 +3,7 @@
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { FontSizeExtension } from '@/extensions/font-size'
+import { LineHeightExtension } from '@/extensions/line-height'
 import TextAlign from '@tiptap/extension-text-align'
 import FontFamily from '@tiptap/extension-font-family'
 import TextStyle from '@tiptap/extension-text-style'
@@ -18,12 +19,15 @@ import ImageResize from 'tiptap-extension-resize-image'
 import Underline from '@tiptap/extension-underline'
 import {Color} from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
-import { useEditorStore } from '@/store/editorStore'
+import { useEditorStore, useMargin } from '@/store/editorStore'
+import Ruler from './Ruler'
 const Editor = () => {
 
 const {setEditor} = useEditorStore();
 
+const{leftMargin,rightMargin} = useMargin();
     const editor = useEditor({
+      immediatelyRender:false,
       onCreate({editor}) {
         setEditor(editor);
       },
@@ -50,11 +54,11 @@ const {setEditor} = useEditorStore();
       },
         editorProps:{
             attributes:{
-                style:"padding-right:56px; padding-left:56px",
+                style:`padding-right:${rightMargin}px; padding-left:${leftMargin}px`,
                 class:"focus:outline-none print:border-0 bg-white border border-[#C7C7C7]  flex flex-col  min-h-[1054px] w-[816px] pt-10 pr-14 pb-10 cursor-text"
             },
         },
-        extensions: [StarterKit,FontSizeExtension,TextAlign.configure({types:["heading","paragraph"]}),Link.configure({openOnClick:false,autolink:true,defaultProtocol:"https"}),Color,Highlight.configure({multicolor:true}),FontFamily,TextStyle,Underline,TaskItem,TaskList,Table,TableCell,TableHeader,TableRow,Image,ImageResize],
+        extensions: [StarterKit,FontSizeExtension,LineHeightExtension.configure({types:["heading","paragraph"]}),TextAlign.configure({types:["heading","paragraph"]}),Link.configure({openOnClick:false,autolink:true,defaultProtocol:"https"}),Color,Highlight.configure({multicolor:true}),FontFamily,TextStyle,Underline,TaskItem,TaskList,Table,TableCell,TableHeader,TableRow,Image,ImageResize],
         content: `
         <table>
           <tbody>
@@ -75,6 +79,7 @@ const {setEditor} = useEditorStore();
   return (
     <>
  <div className=' h-[100%] w-[100%] overflow-x-auto bg-[#e7e7e7] px-4 print:p-0 print:bg-white print:overflow-visible'>
+       <Ruler/>
         <div className='min-w-max  flex justify-center w-[816px] py-4  print:py-0 mx-auto  print:w-full print:min-w-0'>
         <EditorContent editor={editor}/>
         </div>

@@ -9,8 +9,15 @@ interface EditorState{
 }
 
 interface DisplayToolTip{
-    tag: string | "";
-    setTag:(tag:string|"")=> void;
+    tag: string ;
+    setTag:(tag:string)=> void;
+}
+
+interface MarginState{
+    leftMargin:number;
+    rightMargin:number;
+    setLMargin:(leftMargin:number)=> void;
+    setRMargin:(rightMargin:number)=> void;
 }
 
 export const useEditorStore = create<EditorState>((set)=>({
@@ -20,5 +27,12 @@ export const useEditorStore = create<EditorState>((set)=>({
 
 export const useDisplayToolTipStore = create<DisplayToolTip>((set)=>({
     tag:"",
-    setTag:(tag)=>{set({tag})},
+    setTag:(tag)=>set({tag}),
+}))
+
+export const useMargin = create<MarginState>((set)=>({
+    leftMargin:56,
+    setLMargin:(leftMargin)=>set({leftMargin}),
+    rightMargin:56,
+    setRMargin:(rightMargin)=>set({rightMargin}),
 }))
