@@ -696,7 +696,7 @@ const sections:{
 ];
 
   return (
-    <div className="duration-300 bg-[#e7e7e7] mt-1 hover:bg-[#c7c7c7] print:hidden flex items-center min-h-[50px] px-2 py-1 rounded-3xl gap-1">
+    <div className="duration-300 bg-[#e7e7e7]  hover:bg-[#c7c7c7] print:hidden flex items-center min-h-[50px] px-2 py-1 rounded-3xl gap-1">
 
 {
     sections[0]?.map((item)=>{
