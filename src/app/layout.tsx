@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import {Inter} from "next/font/google"
 import "./globals.css";
 import {NuqsAdapter} from "nuqs/adapters/next/app";
-
+import {  TanstackProvider } from '../app/_components/providers/tanstack-provider';
+import ToastProvider from "./_components/providers/toast-provider";
 const inter = Inter ({subsets:["latin"],}) 
 
 export const metadata: Metadata = {
@@ -21,7 +22,12 @@ export default function RootLayout({
         className={inter.className}
       >
         <NuqsAdapter>
-        {children}
+          <TanstackProvider>
+            <ToastProvider>
+          {children}
+          </ToastProvider>
+          </TanstackProvider>
+        
         </NuqsAdapter>
         
       </body>

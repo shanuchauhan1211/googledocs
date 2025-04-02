@@ -21,8 +21,14 @@ import {Color} from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
 import { useEditorStore, useMargin } from '@/store/editorStore'
 import Ruler from './Ruler'
-const Editor = () => {
 
+
+interface EditorProps {
+  document?:{title:string,content:string,ownerId:string,collaboratorIds:string[]};
+}
+
+const Editor:React.FC<EditorProps> = ({document}) => {
+console.log(document?.content)
 const {setEditor} = useEditorStore();
 
 const{leftMargin,rightMargin} = useMargin();
@@ -59,22 +65,7 @@ const{leftMargin,rightMargin} = useMargin();
             },
         },
         extensions: [StarterKit,FontSizeExtension,LineHeightExtension.configure({types:["heading","paragraph"]}),TextAlign.configure({types:["heading","paragraph"]}),Link.configure({openOnClick:false,autolink:true,defaultProtocol:"https"}),Color,Highlight.configure({multicolor:true}),FontFamily,TextStyle,Underline,TaskItem,TaskList,Table,TableCell,TableHeader,TableRow,Image,ImageResize],
-        content: `
-        <table>
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <th colspan="3">Description</th>
-            </tr>
-            <tr>
-              <td>Cyndi Lauper</td>
-              <td>Singer</td>
-              <td>Songwriter</td>
-              <td>Actress</td>
-            </tr>
-          </tbody>
-        </table>
-      `,
+        content: document?.content || "<p>Loading...</p>",
       })
   return (
     <>
