@@ -1,35 +1,70 @@
-import { NextResponse,NextRequest } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { connectDB } from "@/lib/db";
 import Document from "@/models/Documents";
 
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+    try {
+        await connectDB();
 
-export async function GET(req:NextRequest,{params}:{params:{id:String}})
-{
+        const doc = await Document.findById(params.id);
+        if (!doc) {
+            return NextResponse.json({ message: "Document Not Available" }, { status: 400 });
+        }
 
-try {
-    await connectDB();
+        return NextResponse.json({ message: "Document Fetched Successfully", doc }, { status: 200 });
 
-    const doc = await Document.findById(params.id);
-    if(!doc)
-    {
-        return NextResponse.json({message:" Document is Not Available"},{status:400});
+    } catch (error) {
+        console.error("GET Error:", error);
+        return NextResponse.json({ message: "Failed to fetch document" }, { status: 500 });
     }
-
-    return NextResponse.json({message:"Docunment Fetch Successfully",doc},{status:200});
-
-
-} catch (error) {
-    return NextResponse.json({message:"Failed to fetch Doc"},{status:500})
-}
 }
 
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+    try {
+        await connectDB();
+        const deletedDoc = await Document.findByIdAndDelete(params.id);
 
+        if (!deletedDoc) {
+            return NextResponse.json({ error: "Document not found" }, { status: 404 });
+        }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
-    await connectDB();
-    const deletedDoc = await Document.findByIdAndDelete(params.id);
-  
-    if (!deletedDoc) return NextResponse.json({ error: "Document not found" }, { status: 404 });
-  
-    return NextResponse.json({ message: "Document deleted" ,doc:deletedDoc},{status:200});
-  }
+        return NextResponse.json({ message: "Document deleted", doc: deletedDoc }, { status: 200 });
+
+    } catch (error) {
+        console.error("DELETE Error:", error);
+        return NextResponse.json({ message: "Failed to delete document" }, { status: 500 });
+    }
+}
+
+export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
+    try {
+        const { title, action, collaboratorIds, content } = await request.json();
+        await connectDB();
+console.log(title,action);
+        let updatedDoc;
+
+        if (action === "updateTitle") {
+            updatedDoc = await Document.findByIdAndUpdate(params.id, { title }, { new: true });
+            console.log(updatedDoc);
+        } 
+        else if (action === "updateContent") {
+            updatedDoc = await Document.findByIdAndUpdate(params.id, { content }, { new: true });
+        } 
+        else if (action === "updateCollaborators") {
+            updatedDoc = await Document.findByIdAndUpdate(params.id, { collaboratorIds }, { new: true });
+        } 
+        else {
+            return NextResponse.json({ message: "Invalid action" }, { status: 400 });
+        }
+
+        if (!updatedDoc) {
+            return NextResponse.json({ message: "Document not found" }, { status: 404 });
+        }
+
+        return NextResponse.json({ message: "Document Updated Successfully", doc: updatedDoc }, { status: 200 });
+
+    } catch (error) {
+        console.error("PATCH Error:", error);
+        return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+    }
+}

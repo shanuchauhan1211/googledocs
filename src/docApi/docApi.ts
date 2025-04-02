@@ -31,3 +31,9 @@ export const SearchApi = async (search: string) => {
     return response.data
   };
   
+  export const UpdateDocApi = async(data: { title?: string; content?: string; collaboratorsIds?: string[];},action:string, id: string) =>
+  {
+    const response = await axios.patch(`api/documents/${id}`,{ ...data, action });
+    console.log(response);
+    return response.data.doc;
+  }
