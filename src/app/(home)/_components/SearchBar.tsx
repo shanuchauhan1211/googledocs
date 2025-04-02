@@ -36,7 +36,7 @@ const onSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
     
       <Button 
         type="submit" 
-        className={ `absolute duration-500 ${value? `transform transition-all     top-1/2 -translate-y-1/2 translate-x-72 [&_svg]:size-5 rounded-full`: `top-1/2 transition-all translate-x-0  -translate-y-1/2 [&_svg]:size-5 rounded-full`}`}
+        className={ `absolute duration-500 ${value? `transform transition-all     top-1/2 -translate-y-1/2 translate-x-[265px] [&_svg]:size-5 rounded-full`: `top-1/2 transition-all translate-x-0  -translate-y-1/2 [&_svg]:size-5 rounded-full`}`}
         variant="ghost"
       >
         <SearchIcon />

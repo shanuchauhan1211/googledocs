@@ -1,22 +1,37 @@
 import { Button } from "@/components/ui/button";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { deleteDocument } from "@/docApi/docApi";
+import { deleteDocument, SearchApi } from "@/docApi/docApi";
 import { showToast } from "@/lib/toast-helperfxn";
-
+import { useSearch } from "@/hooks/use-search";
 import { useDocStore } from "@/store/docStore";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { TrashIcon } from "lucide-react";
 
-import { useRouter } from "next/navigation";
+import { useRouter} from "next/navigation";
+import { useEffect } from "react";
 
 export default function DocumentTable() {
 
 const {docs,setDocs} = useDocStore();
 const router =  useRouter();
-
+const [search] =useSearch();
 const queryClient = useQueryClient(); 
 
+
+
+const { data:documents, isLoading, error } = useQuery({
+  queryKey: ["Docs", search],
+  queryFn: () => SearchApi(search),
+  
+});
+
+useEffect(()=>{
+if(documents?.docs && Array.isArray(documents.docs))
+{
+  setDocs(documents.docs);
+}
+},[documents,setDocs])
 
 const deleteMutation = useMutation({
     mutationFn: async (id: string) => {

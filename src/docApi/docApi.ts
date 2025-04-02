@@ -19,6 +19,15 @@ export const getAllDocuments = async(id:string)=>{
 
 export const deleteDocument = async(id:string)=>{
     const response = await axios.delete(`api/documents/${id}`);
-    console.log(response);
+   
     return response.data.doc._id;
 }
+
+
+export const SearchApi = async (search: string) => {
+   
+    const response = await axios.get(`/api/search?search=${search}`);
+ 
+    return response.data
+  };
+  
