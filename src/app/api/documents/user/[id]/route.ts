@@ -3,12 +3,11 @@ import { connectDB } from "@/lib/db";
 import Document from "@/models/Documents";
 
 
-
-export async function GET(req:NextRequest, { params }: { params: { id: string } }){
+export async function GET(req:NextRequest,  { params }: { params: Promise<{ id: string }> } ){
 
 try {
 await connectDB();
-const {id} = params;
+const {id} = await params;
 const doc = await Document.find({ownerId:id});
 
 if(!doc)

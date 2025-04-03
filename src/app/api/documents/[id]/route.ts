@@ -1,12 +1,18 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import Document from "@/models/Documents";
 
 
-export async function GET(req: Request, { params }: { params: { id: string } } ) {
+
+export async function GET(req: NextRequest,  { params }: { params: Promise<{ id: string }> }) {
   try {
     await connectDB();
-    const { id } = params;
+    const { id } = await params;
+
+    if (!id) {
+      return NextResponse.json({ message: "Document ID is required" }, { status: 400 });
+    }
+
     const doc = await Document.findById(id);
 
     if (!doc) {
@@ -20,10 +26,15 @@ export async function GET(req: Request, { params }: { params: { id: string } } )
 }
 
 
-export async function DELETE(req: Request, { params }: { params: { id: string } } ) {
+export async function DELETE(req: NextRequest,  { params }: { params: Promise<{ id: string }> }) {
   try {
     await connectDB();
-    const { id } = params;
+    const { id } = await params;
+
+    if (!id) {
+      return NextResponse.json({ message: "Document ID is required" }, { status: 400 });
+    }
+
     const deletedDoc = await Document.findByIdAndDelete(id);
 
     if (!deletedDoc) {
@@ -37,15 +48,19 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 }
 
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest,   { params }: { params: Promise<{ id: string }> }) {
   try {
     const { title, action, collaboratorIds, content }: 
       { title?: string; action: "updateTitle" | "updateContent" | "updateCollaborators"; collaboratorIds?: string[]; content?: string } 
       = await req.json();
 
     await connectDB();
-    const { id } = params;
-    
+    const { id } = await params;
+
+    if (!id) {
+      return NextResponse.json({ message: "Document ID is required" }, { status: 400 });
+    }
+
     let updatedDoc;
 
     switch (action) {
