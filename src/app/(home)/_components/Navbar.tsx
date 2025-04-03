@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { SearchBar } from './SearchBar'
-import { hydrateAuthState, useAuthStore } from '@/store/authStore'
+import { hydrateAuthState} from '@/store/authStore'
 import { Profile } from './Profile'
 
 

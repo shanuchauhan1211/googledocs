@@ -6,7 +6,6 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginApi } from "@/authApi/authApi";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { hydrateAuthState } from '@/store/authStore';
 import { useEffect, useState } from "react";
@@ -14,7 +13,6 @@ import { setCookie } from 'cookies-next';
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { showToast } from "@/lib/toast-helperfxn";
-import { toast } from "react-toastify";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email format"),
@@ -81,7 +79,7 @@ const [mail,setMail]=useState('');
 
       
         <Button variant={"link"} onClick={()=> router.push("/auth/SignUp")} className="mt-4 duration-300 hover:text-blue-500">
-          Don't have an account? Sign Up
+        Don&apos;t have an account? Sign Up
         </Button>
         </div>
     </div>

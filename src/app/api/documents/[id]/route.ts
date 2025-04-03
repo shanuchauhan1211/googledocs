@@ -14,8 +14,8 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
         return NextResponse.json({ message: "Document Fetched Successfully", doc }, { status: 200 });
 
     } catch (error) {
-        console.error("GET Error:", error);
-        return NextResponse.json({ message: "Failed to fetch document" }, { status: 500 });
+        //console.error("GET Error:", error);
+        return NextResponse.json({ message: `${error}` }, { status: 500 });
     }
 }
 
@@ -31,8 +31,8 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
         return NextResponse.json({ message: "Document deleted", doc: deletedDoc }, { status: 200 });
 
     } catch (error) {
-        console.error("DELETE Error:", error);
-        return NextResponse.json({ message: "Failed to delete document" }, { status: 500 });
+        //console.error("DELETE Error:", error);
+        return NextResponse.json({ message: `${error}` }, { status: 500 });
     }
 }
 
@@ -40,7 +40,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
     try {
         const { title, action, collaboratorIds, content } = await request.json();
         await connectDB();
-console.log(title,action);
+//console.log(title,action);
         let updatedDoc;
 
         if (action === "updateTitle") {
@@ -64,7 +64,7 @@ console.log(title,action);
         return NextResponse.json({ message: "Document Updated Successfully", doc: updatedDoc }, { status: 200 });
 
     } catch (error) {
-        console.error("PATCH Error:", error);
-        return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+       // console.error("PATCH Error:", error);
+        return NextResponse.json({ message: `${error}` }, { status: 500 });
     }
 }
