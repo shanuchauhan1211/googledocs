@@ -2,12 +2,13 @@ import { NextResponse,NextRequest } from "next/server";
 import { connectDB } from "@/lib/db";
 import Document from "@/models/Documents";
 
-export async function GET(req:NextRequest,{params}:{params:{id:string}}){
+export async function GET(req:NextRequest,context:any){
 
 try {
 await connectDB();
-
-const doc = await Document.find({ownerId:params.id});
+const {params} = context;
+        const id =  params.id;
+const doc = await Document.find({ownerId:id});
 
 if(!doc)
 {

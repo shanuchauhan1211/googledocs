@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import { connectDB } from "@/lib/db";
 import Otps from "@/models/Otps";
 import crypto from "crypto";
-import { sendEmail } from "../../mail/route"
+import { sendEmail } from "../../../../lib/sendEmail"
 import User from "@/models/User";
 
 export async function POST(request: NextRequest) {

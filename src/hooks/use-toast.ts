@@ -2,8 +2,10 @@ import { useReducer } from "react";
 
 interface ToasterToast {
   id: string;
+  title?: string;
+  description?: string;
   message: string;
-  type?: "success" | "error" | "info" | "warning";
+  variant?: "success" | "error" | "info" | "warning"; // Renamed from `type` to `variant`
 }
 
 const actionTypes = {
@@ -12,8 +14,6 @@ const actionTypes = {
   DISMISS_TOAST: "DISMISS_TOAST",
   REMOVE_TOAST: "REMOVE_TOAST",
 } as const;
-
-// Define Action Types
 
 type Action =
   | {
