@@ -2,24 +2,11 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import Document from "@/models/Documents";
 
-interface ContextParams {
-  params: {
-    id: string;
-  };
-}
 
-
-interface PatchRequestBody {
-  title?: string;
-  action: "updateTitle" | "updateContent" | "updateCollaborators";
-  collaboratorIds?: string[];
-  content?: string;
-}
-
-export async function GET(req: Request, context: ContextParams) {
+export async function GET(req: Request, { params }: { params: { id: string } } ) {
   try {
     await connectDB();
-    const { id } = context.params;
+    const { id } = params;
     const doc = await Document.findById(id);
 
     if (!doc) {
@@ -33,10 +20,10 @@ export async function GET(req: Request, context: ContextParams) {
 }
 
 
-export async function DELETE(req: Request, context: ContextParams) {
+export async function DELETE(req: Request, { params }: { params: { id: string } } ) {
   try {
     await connectDB();
-    const { id } = context.params;
+    const { id } = params;
     const deletedDoc = await Document.findByIdAndDelete(id);
 
     if (!deletedDoc) {
@@ -50,11 +37,14 @@ export async function DELETE(req: Request, context: ContextParams) {
 }
 
 
-export async function PATCH(req: Request, context: ContextParams) {
+export async function PATCH(req: Request, { params }: { params: { id: string } }) {
   try {
-    const { title, action, collaboratorIds, content }: PatchRequestBody = await req.json();
+    const { title, action, collaboratorIds, content }: 
+      { title?: string; action: "updateTitle" | "updateContent" | "updateCollaborators"; collaboratorIds?: string[]; content?: string } 
+      = await req.json();
+
     await connectDB();
-    const { id } = context.params;
+    const { id } = params;
     
     let updatedDoc;
 

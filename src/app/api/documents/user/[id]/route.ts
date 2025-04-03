@@ -3,18 +3,12 @@ import { connectDB } from "@/lib/db";
 import Document from "@/models/Documents";
 
 
-interface ContextParams {
-    params: {
-      id: string;
-    };
-  }
-  
 
-export async function GET(req:NextRequest,context:ContextParams){
+export async function GET(req:NextRequest, { params }: { params: { id: string } }){
 
 try {
 await connectDB();
-const {id} =context.params;
+const {id} = params;
 const doc = await Document.find({ownerId:id});
 
 if(!doc)
