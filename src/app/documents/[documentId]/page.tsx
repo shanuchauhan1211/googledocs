@@ -15,7 +15,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
   const { documentId } = use(params);
   const setCurrentDoc = useDocStore ((state) => state.setCurrentDoc);
   
-  const { data: document, isLoading, error } = useQuery({
+  const { data: document, isLoading } = useQuery({
     queryKey: ["document", documentId],
     queryFn: () => getDocApi(documentId),
     enabled: !!documentId, 
@@ -31,7 +31,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
   return (
     <>
     {
-     document &&
+     document &&!isLoading &&
      ( <div className="min-h-screen">
       <div className="flex flex-col px-4 pb-2.5 shadow-md fixed top-0 left-0 right-0 z-10 bg-[white] rounded-xl">
         <NavBar  />

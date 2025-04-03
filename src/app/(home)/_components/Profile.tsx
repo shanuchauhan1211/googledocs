@@ -1,6 +1,6 @@
 'use client'
 
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarSub, MenubarSubTrigger, MenubarTrigger } from "@/components/ui/menubar"
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from "@/components/ui/menubar"
 
 import {  LogOutIcon,  PersonStandingIcon,  Settings2Icon, } from "lucide-react"
 import { useAuthStore } from "@/store/authStore"

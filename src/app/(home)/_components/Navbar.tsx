@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 import { SearchBar } from './SearchBar'
 import { hydrateAuthState, useAuthStore } from '@/store/authStore'
 import { Profile } from './Profile'
-import { showToast } from '@/lib/toast-helperfxn'
+
 
 const Navbar = () => {
 
@@ -13,7 +13,7 @@ useEffect(()=>{
 hydrateAuthState();
 },[])
 
-  const {user} = useAuthStore();
+ // const {user} = useAuthStore();
 
 
   return (

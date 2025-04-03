@@ -3,8 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { DocumentTitle } from './DocumentTitle'
-import {Menubar,MenubarContent,MenubarItem,MenubarMenu,MenubarSeparator,MenubarShortcut,MenubarSub,MenubarSubContent,MenubarSubTrigger,MenubarTrigger} from "@/components/ui/menubar";
-import { FileIcon, FileJson2Icon, FilePenIcon, FilesIcon, FileTextIcon, GlobeIcon, PrinterIcon, SaveIcon, Table2Icon, Trash2Icon } from 'lucide-react';
+import {Menubar,MenubarContent,MenubarItem,MenubarMenu,MenubarSeparator,MenubarSub,MenubarSubContent,MenubarSubTrigger,MenubarTrigger} from "@/components/ui/menubar";
+import { FileIcon, FilePenIcon,FileTextIcon, GlobeIcon, PrinterIcon, SaveIcon, Table2Icon, Trash2Icon } from 'lucide-react';
 import { BsFilePdf } from 'react-icons/bs';
 import { useEditorStore } from '@/store/editorStore'
 import { Input } from '@/components/ui/input'

@@ -2,7 +2,7 @@
 
 import "react-toastify/dist/ReactToastify.css";
 import "../../globals.css";
-import { ToastContainer, ToastOptions } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 interface ToastProviderProps {
   children: React.ReactNode;

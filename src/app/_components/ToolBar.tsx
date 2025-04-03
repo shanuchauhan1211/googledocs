@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import {type ColorResult , SketchPicker} from 'react-color'
 import {type Level} from '@tiptap/extension-heading'
-import {  AlignCenterIcon, AlignJustifyIcon, AlignLeftIcon, AlignRightIcon, BoldIcon, ChevronDownIcon, HighlighterIcon, ImageIcon, ItalicIcon, Link2Icon, ListCollapseIcon, ListIcon, ListOrderedIcon, ListTodoIcon, LucideIcon, MessageSquarePlusIcon, MinusIcon, PlusIcon, PrinterIcon, Redo2Icon, RemoveFormattingIcon, SearchCheckIcon, SearchIcon, SpellCheck2Icon, UnderlineIcon, Undo2Icon, UploadIcon } from "lucide-react";
+import {  AlignCenterIcon, AlignJustifyIcon, AlignLeftIcon, AlignRightIcon, BoldIcon, ChevronDownIcon, HighlighterIcon, ImageIcon, ItalicIcon, Link2Icon, ListCollapseIcon, ListIcon, ListOrderedIcon, ListTodoIcon, LucideIcon, MessageSquarePlusIcon, MinusIcon, PlusIcon, PrinterIcon, Redo2Icon, RemoveFormattingIcon,SearchIcon, SpellCheck2Icon, UnderlineIcon, Undo2Icon, UploadIcon } from "lucide-react";
 import { useEditorStore } from "@/store/editorStore";
 import { Separator } from "@/components/ui/separator";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -156,9 +156,9 @@ const UpdateFontSize = (newSize:string)=>{
     }
     }
 
- const handleInputChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
-    setInputValue(e.target.value);
- }   
+//  const handleInputChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+//     setInputValue(e.target.value);
+//  }   
 
  const handleInputBlur = ()=>{
     UpdateFontSize(inputValue);

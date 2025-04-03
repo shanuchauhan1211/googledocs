@@ -23,7 +23,7 @@ const [selectedDoc, setSelectedDoc] = useState("");
 const [newTitle, setNewTitle] = useState("");
 
 
-const { data:documents, isLoading, error } = useQuery({
+const { data:documents } = useQuery({
   queryKey: ["Docs", search],
   queryFn: () => SearchApi(search),
   
@@ -82,7 +82,7 @@ const renameMutation = useMutation({
         </TableRow>
       </TableHeader>
       <TableBody className="bg-[#F1F3F4]">
-  {docs?.length! > 0 ? (
+  {docs && docs.length > 0 ? (
     docs?.map((doc, index) => (
       <TableRow className={`${deleteMutation?.status==='pending'?` opacity-30`:``}`}  key={doc._id || index}>
         <TableCell 

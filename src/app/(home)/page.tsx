@@ -11,11 +11,11 @@ import { useEffect } from "react";
 const Home = () => {
   const { user } = useAuthStore();
   const setDocs = useDocStore((state) => state.setDocs);
-  const { docs } = useDocStore();
+  //const { docs } = useDocStore();
 
   const { data: documents } = useQuery({
     queryKey: ["Docs", user?._id],
-    queryFn: () => getAllDocuments(user?._id!),
+    queryFn: () => getAllDocuments(user?user._id:''),
     enabled: !!user?._id,
   });
 

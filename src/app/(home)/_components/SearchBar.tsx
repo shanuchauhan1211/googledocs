@@ -27,7 +27,7 @@ const onSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
       
       <Input
         onChange={OnChange}
-        value={value}
+        value={value||search}
         ref={inputRef}
         placeholder="Search...."
         className="md:text-base duration-300 hover:drop-shadow-lg text-neutral-700 placeholder:text-neutral-400 w-full bg-[#e9ecee] h-[40px] rounded-full border-none focus-visible:ring-0 px-12 pl-16 pr-16" 

@@ -45,7 +45,9 @@ export async function POST(req: NextRequest) {
 
     const token = createToken(existingUser._id.toString());
 
-    const { password: _, ...profile } = existingUser.toObject();
+    const profile = existingUser.toObject();
+    delete profile.password; 
+    
 
     return NextResponse.json(
       {
