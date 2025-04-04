@@ -27,6 +27,7 @@ If you did found OTP Mail on Gmail Inbox look for it in Spam.
 
 ---
 
+Deployed at [Vercel] https://meowdocs.vercel.app 
 
 git clone https://github.com/yourusername/meowdocs.git
 cd meowdocs
