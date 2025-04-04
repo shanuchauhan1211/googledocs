@@ -3,7 +3,7 @@ import { connectDB } from "@/lib/db";
 import User from "@/models/User";
 
 
-export async function GET(req:NextRequest){
+export async function GET(_:NextRequest){
 
 try {
     await connectDB();
