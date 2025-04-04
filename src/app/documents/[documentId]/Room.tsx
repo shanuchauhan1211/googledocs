@@ -41,7 +41,6 @@ const {currentDoc} = useDocStore();
       throttle={16}
       authEndpoint="/api/liveblock-auth" 
       resolveUsers={({userIds})=>{return userIds.map((userId)=> users?.Info?.find(({_id}:{_id:string})=>_id ===userId)??undefined)}}
-      resolveRoomsInfo={()=>[]}
       resolveMentionSuggestions={({text})=>{let filteredUser = users.Info;
         if(text)
         {
