@@ -18,33 +18,39 @@ import { useRouter } from "next/navigation";
 
 const templates= [{
     id:"blank",
-    label:"BlankDocumnet",
-    imageUrl:"/logo.svg"
+    label:"Untitled Documnet",
+    imageUrl:"/logo.svg",
+    content:"Start Typing...."
 },
 {
-    id:"Resume",
-    label:"Resume",
-    imageUrl:"/resume.jpg"
+    id:"Resume1",
+    label:"Resume1",
+    imageUrl:"/resume.jpg",
+    content:"Resume Layout1"
 },
 {
-    id:"Docs",
-    label:"Docs",
-    imageUrl:"/doc.jpg"
+    id:"Document1",
+    label:"Document1",
+    imageUrl:"/doc.jpg",
+    content:"Document Lauout 1"
 },
 {
-    id:"Docs",
-    label:"Do",
-    imageUrl:"/doc.jpg"
+    id:"Document2",
+    label:"DDocument2",
+    imageUrl:"/doc.jpg",
+    content:"Document Lauout 2"
 },
 {
-    id:"Docs",
-    label:"Doc",
-    imageUrl:"/doc.jpg"
+    id:"Document3",
+    label:"Document3",
+    imageUrl:"/doc.jpg",
+    content:"Document Lauout 3"
 },
 {
-    id:"Resume",
-    label:"Resum",
-    imageUrl:"/resume.jpg"
+    id:"Resume2",
+    label:"Resume2",
+    imageUrl:"/resume.jpg",
+    content:"Resume Layout2"
 },]
 
 
@@ -74,8 +80,8 @@ const {user} = useAuthStore();
             <h3 className='font-medium '>Create A New Document</h3>
             <Carousel>
                 <CarouselContent className="-ml-4 ">
-                    {templates.map((template,index)=>(
-                        <CarouselItem key={template.label} onClick={()=>{if(index===0){mutate({title:template.label,content:'Start Typing',ownerId:user?._id as string})}}} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5  2xl:basis-[14.285714%] pl-4 ">
+                    {templates.map((template)=>(
+                        <CarouselItem key={template.id} onClick={()=>{mutate({title:template.label,content:template.content,ownerId:user?._id as string})}} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5  2xl:basis-[14.285714%] pl-4 ">
                             <div className={cn("aspect-[3/4]  flex flex-col  gap-y-2.5",isCreating && "pointer-events-none opacity-50")} >
                             <button
   className="size-full hover:border-blue-500 rounded-sm border transition flex flex-col items-center justify-center gap-y-4 bg-white overflow-hidden relative"

@@ -11,6 +11,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, Dialog
 import { Input } from "@/components/ui/input";
 import { useRouter} from "next/navigation";
 import { useEffect, useState } from "react";
+import { useAuthStore } from "@/store/authStore";
 
 export default function DocumentTable() {
 
@@ -23,10 +24,13 @@ const [selectedDoc, setSelectedDoc] = useState("");
 const [newTitle, setNewTitle] = useState("");
 
 
+const {user} = useAuthStore();
+
+
 const { data:documents } = useQuery({
   queryKey: ["Docs", search],
-  queryFn: () => SearchApi(search),
-  
+  queryFn: () => SearchApi(search,{id:user?user._id:''}),
+  enabled: !!user?._id,
 });
 
 useEffect(()=>{

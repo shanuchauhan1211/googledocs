@@ -2,6 +2,7 @@
 
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+//import { Room } from '../documents/[documentId]/Room'
 import { FontSizeExtension } from '@/extensions/font-size'
 import { LineHeightExtension } from '@/extensions/line-height'
 import TextAlign from '@tiptap/extension-text-align'
@@ -20,7 +21,9 @@ import Underline from '@tiptap/extension-underline'
 import {Color} from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
 import { useEditorStore, useMargin } from '@/store/editorStore'
+import {useLiveblocksExtension} from "@liveblocks/react-tiptap"
 import Ruler from './Ruler'
+import { Threads } from './Threads'
 
 
 interface EditorProps {
@@ -28,7 +31,7 @@ interface EditorProps {
 }
 
 const Editor:React.FC<EditorProps> = ({document}) => {
-console.log(document?.content)
+const liveblocks = useLiveblocksExtension();
 const {setEditor} = useEditorStore();
 
 const{leftMargin,rightMargin} = useMargin();
@@ -64,7 +67,7 @@ const{leftMargin,rightMargin} = useMargin();
                 class:"focus:outline-none print:border-0 bg-white border border-[#C7C7C7]  flex flex-col  min-h-[1054px] w-[816px] pt-10 pr-14 pb-10 cursor-text"
             },
         },
-        extensions: [StarterKit,FontSizeExtension,LineHeightExtension.configure({types:["heading","paragraph"]}),TextAlign.configure({types:["heading","paragraph"]}),Link.configure({openOnClick:false,autolink:true,defaultProtocol:"https"}),Color,Highlight.configure({multicolor:true}),FontFamily,TextStyle,Underline,TaskItem,TaskList,Table,TableCell,TableHeader,TableRow,Image,ImageResize],
+        extensions: [liveblocks,StarterKit.configure({history:false}),FontSizeExtension,LineHeightExtension.configure({types:["heading","paragraph"]}),TextAlign.configure({types:["heading","paragraph"]}),Link.configure({openOnClick:false,autolink:true,defaultProtocol:"https"}),Color,Highlight.configure({multicolor:true}),FontFamily,TextStyle,Underline,TaskItem,TaskList,Table,TableCell,TableHeader,TableRow,Image,ImageResize],
         content: document?.content || "<p>Loading...</p>",
       })
   return (
@@ -73,12 +76,10 @@ const{leftMargin,rightMargin} = useMargin();
        <Ruler/>
         <div className='min-w-max  flex justify-center w-[816px] py-4  print:py-0 mx-auto  print:w-full print:min-w-0'>
         <EditorContent editor={editor}/>
+        <Threads editor={editor}/>
         </div>
     </div>
    
-
-
-
     </>
    
   )

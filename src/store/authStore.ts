@@ -9,6 +9,31 @@ interface AuthState {
   logout: () => void;
 }
 
+interface userdetail{
+  _id:string,
+  email:string,
+  name:string
+}
+
+interface AllUserState{
+
+  AllUser: userdetail[]|null,
+  setAlluser: (AllUser:userdetail[]) => void
+
+}
+
+
+export const useAllUserStore = create<AllUserState>((set)=>({
+
+AllUser:null,
+
+setAlluser:(AllUser) =>{
+  set({AllUser});
+}
+
+}))
+
+
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   token: null,

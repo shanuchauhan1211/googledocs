@@ -8,7 +8,7 @@ try{
 const {title,content,ownerId}= await req.json();
 await connectDB();
 
-const newDoc = await Document.create({title,content,ownerId});
+const newDoc = await Document.create({title,content,ownerId,collaboratorIds:[ownerId]});
 
 return NextResponse.json({message:"Document Created Successfully",doc:newDoc._id},{status:200})
 

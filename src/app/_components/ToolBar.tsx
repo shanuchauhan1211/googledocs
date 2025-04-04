@@ -673,8 +673,8 @@ const sections:{
         {
             label:"Comments",
             icon: MessageSquarePlusIcon,
-            onClick:()=> console.log("Cooments"),
-            isActive: false,
+            onClick:()=> editor?.chain().focus().addPendingComment().run(),
+            isActive: editor?.isActive("liveblocksCommentMark"),
             
         },
         {

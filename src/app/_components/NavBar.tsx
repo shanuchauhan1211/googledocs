@@ -9,6 +9,8 @@ import { BsFilePdf } from 'react-icons/bs';
 import { useEditorStore } from '@/store/editorStore'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { Profile } from '../(home)/_components/Profile'
+import { AddCollaborator } from './AddCollaborator'
 
 interface RowsAndCols {
   rows: number;
@@ -201,8 +203,8 @@ disabled={customRowandCol.initial.rows===0||customRowandCol.initial.cols===0}
 
       </div>
     </div>
-
     </div>
+    <div className='flex gap-3'><AddCollaborator/>  <Profile/></div>
    </nav>
   )
 }

@@ -13,10 +13,16 @@ export const createToken = (id: string, expiresIn?: null): string => {
   }
 };
 
-export const verifyToken = (token: string): jwt.JwtPayload | string => {
+export function verifyToken(token: string): { _id: string } | null {
   try {
-    return jwt.verify(token, SECRET_KEY);
+    const decoded = jwt.verify(token, SECRET_KEY) as jwt.JwtPayload;
+    if (typeof decoded === "object" && decoded._id) {
+      return { _id: decoded._id }; 
+    }
+    return null;
   } catch (error) {
-    throw new Error(`JWT Verification Error: ${(error as Error).message}`);
+    console.error("JWT verification failed:", error);
+    return null;
   }
-};
+}
+

@@ -50,10 +50,10 @@ export async function DELETE(req: NextRequest,  { params }: { params: Promise<{ 
 
 export async function PATCH(req: NextRequest,   { params }: { params: Promise<{ id: string }> }) {
   try {
-    const { title, action, collaboratorIds, content }: 
-      { title?: string; action: "updateTitle" | "updateContent" | "updateCollaborators"; collaboratorIds?: string[]; content?: string } 
+    const { title, action, collaboratorId, content }: 
+      { title?: string; action: "updateTitle" | "updateContent" | "updateCollaborators"; collaboratorId?: string; content?: string } 
       = await req.json();
-
+console.log(collaboratorId);
     await connectDB();
     const { id } = await params;
 
@@ -71,7 +71,12 @@ export async function PATCH(req: NextRequest,   { params }: { params: Promise<{ 
         updatedDoc = await Document.findByIdAndUpdate(id, { content }, { new: true });
         break;
       case "updateCollaborators":
-        updatedDoc = await Document.findByIdAndUpdate(id, { collaboratorIds }, { new: true });
+        updatedDoc = await Document.findByIdAndUpdate(
+          id,
+          { $addToSet: { collaboratorIds: collaboratorId } }, 
+          { new: true }
+        );
+        
         break;
       default:
         return NextResponse.json({ message: "Invalid action" }, { status: 400 });
