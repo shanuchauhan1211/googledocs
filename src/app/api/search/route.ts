@@ -20,7 +20,10 @@ export async function GET(req: NextRequest) {
     // };
 
     const filterdocs = await Document.find(filter);
-const docs = filterdocs.filter((item)=> item.ownerId ===id );
+    const docs = filterdocs.filter(
+      (item) => item.ownerId === id || item.collaboratorIds.includes(id)
+    );
+    
     return NextResponse.json({ docs }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: `${error}` }, { status: 500 });

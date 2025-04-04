@@ -8,7 +8,12 @@ export async function GET(req:NextRequest,  { params }: { params: Promise<{ id: 
 try {
 await connectDB();
 const {id} = await params;
-const doc = await Document.find({ownerId:id});
+const doc = await Document.find({
+    $or: [
+      { ownerId: id }, 
+      { collaboratorIds: id } 
+    ]
+  });
 
 if(!doc)
 {
