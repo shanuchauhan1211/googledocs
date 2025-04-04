@@ -1,9 +1,9 @@
-import { NextResponse,NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import User from "@/models/User";
 
 
-export async function GET(_:NextRequest){
+export async function GET(){
 
 try {
     await connectDB();
