@@ -1,18 +1,9 @@
 interface doc {
-    children:React.ReactNode;
+  children: React.ReactNode;
 }
 
+const layout = ({ children }: doc) => {
+  return <div>{children}</div>;
+};
 
-
-const layout = ({children}:doc) => {
-  return (
-    <div>
-
-
-{children}
-    </div>
-    
-  )
-}
-
-export default layout
+export default layout;

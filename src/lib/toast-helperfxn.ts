@@ -1,17 +1,14 @@
 import { toast, ToastContent, ToastOptions, Slide, Id } from "react-toastify";
 
-
 export const defaultToastOptions: ToastOptions = {
-    position: "top-right",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "light",
-    transition:Slide,
-    
-
+  position: "top-right",
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  theme: "light",
+  transition: Slide,
 };
 
 type ToastType = "success" | "error" | "info" | "warning" | "default";

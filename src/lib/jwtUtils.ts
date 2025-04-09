@@ -1,4 +1,3 @@
-
 import jwt from "jsonwebtoken";
 
 const SECRET_KEY = process.env.JWT_SECRET!;
@@ -17,7 +16,7 @@ export function verifyToken(token: string): { _id: string } | null {
   try {
     const decoded = jwt.verify(token, SECRET_KEY) as jwt.JwtPayload;
     if (typeof decoded === "object" && decoded._id) {
-      return { _id: decoded._id }; 
+      return { _id: decoded._id };
     }
     return null;
   } catch (error) {
@@ -25,4 +24,3 @@ export function verifyToken(token: string): { _id: string } | null {
     return null;
   }
 }
-

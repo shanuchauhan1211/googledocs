@@ -1,4 +1,4 @@
-import { Schema,models, model, Document } from "mongoose";
+import { Schema, models, model, Document } from "mongoose";
 
 export interface IOtp extends Document {
   email: string;
@@ -19,9 +19,8 @@ const otpSchema = new Schema<IOtp>(
       default: "pending",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
-
 
 otpSchema.index({ otpExpires: 1 }, { expireAfterSeconds: 0 });
 

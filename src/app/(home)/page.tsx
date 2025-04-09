@@ -1,10 +1,10 @@
-'use client';
+"use client";
 import Navbar from "./_components/Navbar";
 import { Templates } from "./_components/Templates";
 import DocumentTable from "./_components/DocumentTable";
 import { useQuery } from "@tanstack/react-query";
 import { useDocStore } from "@/store/docStore";
-import { getAllDocuments} from "@/docApi/docApi";
+import { getAllDocuments } from "@/frontendApis/docApi/docApi";
 import { useAuthStore } from "@/store/authStore";
 import { useEffect } from "react";
 
@@ -16,13 +16,13 @@ const Home = () => {
 
   const { data: documents } = useQuery({
     queryKey: ["Docs", user?._id],
-    queryFn: () => getAllDocuments(user?user._id:''),
+    queryFn: () => getAllDocuments(user ? user._id : ""),
     enabled: !!user?._id,
   });
 
   // const { data: AllUser } = useQuery({
   //   queryKey: ["Alluser", user?._id],
-  //   queryFn: getAllUser,  
+  //   queryFn: getAllUser,
   //   enabled: !!user?._id,
   // });
 
@@ -34,14 +34,11 @@ const Home = () => {
   //   }
   // },[AllUser,setAlluser])
 
-
   useEffect(() => {
     if (documents?.doc && Array.isArray(documents.doc)) {
       setDocs(documents.doc);
     }
   }, [documents, setDocs]);
-
- 
 
   return (
     <div className="min-h-screen flex flex-col">

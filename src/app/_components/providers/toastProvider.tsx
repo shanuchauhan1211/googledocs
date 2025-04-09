@@ -9,12 +9,10 @@ interface ToastProviderProps {
 }
 
 export default function ToastProvider({ children }: ToastProviderProps) {
-  
-
   return (
     <>
       {children}
-      <ToastContainer  className="fixed top-5 right-5 z-[9999]" />
+      <ToastContainer className="fixed top-5 right-5 z-[9999]" />
     </>
   );
 }

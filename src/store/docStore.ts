@@ -1,14 +1,13 @@
 import { create } from "zustand";
 
-
 interface Document {
   title: string;
   content: string;
   _id: string;
   ownerId: string;
   collaboratorIds?: string[];
-  createdAt:Date,
-  updatedAt:Date,
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 interface DocState {
@@ -18,16 +17,14 @@ interface DocState {
   setDocs: (docs: Document[]) => void;
 }
 
-
-interface DocUser{
-  _id:string,
-  name:string
+interface DocUser {
+  _id: string;
+  name: string;
 }
 
-
-interface CurrentDocUserState{
-  currentDocUser: DocUser[]|null;
-  setCurrentDocUser : (currentDocUser:DocUser[])=>void;
+interface CurrentDocUserState {
+  currentDocUser: DocUser[] | null;
+  setCurrentDocUser: (currentDocUser: DocUser[]) => void;
 }
 
 export const useDocStore = create<DocState>((set) => ({
@@ -36,26 +33,17 @@ export const useDocStore = create<DocState>((set) => ({
 
   setCurrentDoc: (currentDoc) => {
     set({ currentDoc });
-   
   },
 
   setDocs: (docs) => {
     set({ docs });
-   
   },
 }));
 
+export const useCurrentDocStore = create<CurrentDocUserState>((set) => ({
+  currentDocUser: null,
 
-
-
-export const useCurrentDocStore = create<CurrentDocUserState>((set)=>({
-
-  
-  currentDocUser:null,
-
-
-setCurrentDocUser:(currentDocUser)=>{
-  set({currentDocUser});
-}
-
+  setCurrentDocUser: (currentDocUser) => {
+    set({ currentDocUser });
+  },
 }));

@@ -33,13 +33,16 @@ type Action =
       toastId?: string;
     };
 
-const toastReducer = (state: ToasterToast[], action: Action): ToasterToast[] => {
+const toastReducer = (
+  state: ToasterToast[],
+  action: Action,
+): ToasterToast[] => {
   switch (action.type) {
     case actionTypes.ADD_TOAST:
       return [...state, action.toast];
     case actionTypes.UPDATE_TOAST:
       return state.map((toast) =>
-        toast.id === action.toast.id ? { ...toast, ...action.toast } : toast
+        toast.id === action.toast.id ? { ...toast, ...action.toast } : toast,
       );
     case actionTypes.DISMISS_TOAST:
       return state.filter((toast) => toast.id !== action.toastId);
