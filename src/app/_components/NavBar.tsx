@@ -16,13 +16,13 @@ import {
 } from "@/components/ui/menubar";
 import {
   FileIcon,
-  FilePenIcon,
+ // FilePenIcon,
   FileTextIcon,
   GlobeIcon,
   PrinterIcon,
   SaveIcon,
   Table2Icon,
-  Trash2Icon,
+ // Trash2Icon,
 } from "lucide-react";
 import { BsFilePdf } from "react-icons/bs";
 import { useEditorStore } from "@/store/editorStore";

@@ -5,11 +5,14 @@ import {
   MenubarContent,
   MenubarItem,
   MenubarMenu,
-  MenubarSeparator,
+ // MenubarSeparator,
   MenubarTrigger,
 } from "@/components/ui/menubar";
 
-import { LogOutIcon, PersonStandingIcon, Settings2Icon } from "lucide-react";
+import { LogOutIcon,
+  // PersonStandingIcon, 
+  // Settings2Icon
+   } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
 import { showToast } from "@/lib/toast-helperfxn";
